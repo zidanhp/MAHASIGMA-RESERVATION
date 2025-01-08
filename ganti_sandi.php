@@ -1,4 +1,28 @@
 <?php
+/*
+Pseudocode:
+
+1. Mulai session pengguna
+    - Mulai session untuk mengakses data pengguna yang sedang login.
+
+2. Cek apakah pengguna sudah login
+    - Jika session 'username' tidak ada, arahkan pengguna ke halaman login.
+
+3. Ambil data pengguna dari database
+    - Ambil username pengguna dari session.
+    - Query database untuk mengambil data pengguna berdasarkan username yang ada di session.
+
+4. Tampilkan halaman ubah kata sandi
+    - Ambil nomor handphone pengguna dari data yang diambil untuk keperluan verifikasi (jika diperlukan).
+    - Tampilkan form untuk mengubah kata sandi (input password baru dan konfirmasi password baru).
+
+5. Kirimkan data ke halaman untuk memproses perubahan kata sandi
+    - Form akan mengirimkan data ke halaman update_password.php untuk memperbarui kata sandi pengguna.
+
+6. JavaScript untuk toggle password visibility
+    - Implementasikan fungsi untuk menampilkan dan menyembunyikan kata sandi dengan mengklik ikon mata (toggle password).
+
+*/
 session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
