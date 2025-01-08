@@ -32,48 +32,54 @@ Pseudocode:
 6. Fungsi JavaScript
     - Implementasikan fungsi toggle untuk menampilkan/hide password ketika tombol eye diklik.
 */
-include 'koneksi.php';
-
 // Sertakan koneksi
-session_start();
+include 'koneksi.php'; // INCLUDE koneksi.php
+
+// Aktifkan error reporting
+error_reporting(E_ALL); // AKTIFKAN error_reporting(E_ALL)
+ini_set('display_errors', 1); // SET display_errors ← 1
+
+// Mulai sesi
+session_start(); // SESSION_START()
 
 // Jika pengguna sudah login, arahkan ke halaman beranda
-if (isset($_SESSION['username'])) {
-    header("Location: beranda.php"); // Ganti dengan nama file beranda Anda
-    exit();
+if (isset($_SESSION['username'])) { // IF session dengan nama 'username' sudah ada THEN
+    header("Location: beranda.php"); // ARAHKAN ke halaman beranda.php
+    exit; // EXIT
 }
 
-if (isset($_POST['login'])) {
-    $username = mysqli_real_escape_string($koneksi, $_POST['username']);
-    $password = mysqli_real_escape_string($koneksi, $_POST['password']);
+// Cek apakah tombol login ditekan
+if (isset($_POST['login'])) { // IF form submit dengan nama 'login' THEN
+    $username = mysqli_real_escape_string($koneksi, $_POST['username']); // username ← EscapeString(INPUT username)
+    $password = mysqli_real_escape_string($koneksi, $_POST['password']); // password ← EscapeString(INPUT password)
 
     // Ambil data user berdasarkan username
-    $query = "SELECT * FROM user WHERE username = '$username'";
-    $result = mysqli_query($koneksi, $query);
+    $query = "SELECT * FROM user WHERE username = '$username'"; // query ← EXECUTE "SELECT * FROM user WHERE username = username"
+    $result = mysqli_query($koneksi, $query); // result ← Jalankan query
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $data = mysqli_fetch_assoc($result);
+    if ($result && mysqli_num_rows($result) > 0) { // IF result berhasil DAN jumlah baris result > 0 THEN
+        $data = mysqli_fetch_assoc($result); // data ← Ambil hasil dari result
 
         // Verifikasi password
-        if (password_verify($password, $data['password'])) {
-            // Login berhasil
-            $_SESSION['username'] = $data['username'];
-            $_SESSION['role'] = $data['role'];
+        if (password_verify($password, $data['password'])) { // IF VERIFY(password, data['password']) THEN
+            $_SESSION['username'] = $data['username']; // SET session['username'] ← data['username']
+            $_SESSION['role'] = $data['role']; // SET session['role'] ← data['role']
 
-            if ($data['role'] === 'admin') {
-                header("Location: dashboard.php");
+            if ($data['role'] === 'admin') { // IF data['role'] = 'admin' THEN
+                header("Location: dashboard.php"); // ARAHKAN ke halaman dashboard.php
             } else {
-                header("Location: beranda.php");
+                header("Location: beranda.php"); // ELSE ARAHKAN ke halaman beranda.php
             }
-            exit;
+            exit; // EXIT
         } else {
-            echo "<script>alert('Password salah!'); window.location.href = 'login.php';</script>";
+            echo "<script>alert('Password salah!'); window.location.href = 'login.php';</script>"; // TAMPILKAN pesan "Password salah!" ARAHKAN ke halaman login.php
         }
     } else {
-        echo "<script>alert('Username tidak ditemukan!'); window.location.href = 'login.php';</script>";
+        echo "<script>alert('Username tidak ditemukan!'); window.location.href = 'login.php';</script>"; // TAMPILKAN pesan "Username tidak ditemukan!" ARAHKAN ke halaman login.php
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
