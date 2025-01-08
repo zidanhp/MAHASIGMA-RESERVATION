@@ -1,3 +1,16 @@
+// Pseudocode untuk Fitur Aplikasi
+// 1. Mulai sesi untuk memeriksa apakah pengguna sudah login dan apakah peran pengguna adalah 'admin'.
+// 2. Jika pengguna tidak login atau bukan admin, arahkan ke halaman login.
+// 3. Sertakan file koneksi ke database.
+// 4. Ambil jumlah total pemesanan, termasuk jumlah pemesanan yang sudah dibayar, belum dibayar, dan dibatalkan dari database.
+// 5. Tampilkan dashboard dengan kartu yang menunjukkan jumlah total pemesanan, pemesanan yang sudah dibayar, yang belum dibayar, dan yang dibatalkan.
+// 6. Tampilkan tabel dengan detail pemesanan: nama, nama lapangan, kategori, tanggal, waktu, harga, dan status pembayaran.
+// 7. Biarkan admin mengubah status pembayaran setiap pemesanan dengan mengklik tombol:
+//    - Status dapat berupa 'Sudah Bayar', 'Belum Bayar', atau 'Batal Pesan'.
+//    - Perbarui status pembayaran di database melalui AJAX.
+// 8. Setelah diperbarui, ubah dinamis kelas tombol dan teks untuk mencerminkan status baru.
+// 9. Akhiri script PHP dan tutup tag HTML.
+?>
 <!doctype html>
 <html lang="en">
 
