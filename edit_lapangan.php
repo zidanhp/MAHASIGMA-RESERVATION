@@ -1,4 +1,19 @@
 <?php
+// Pseudocode untuk fitur "Edit Lapangan":
+// 1. Ambil data yang dikirimkan dari form menggunakan metode POST:
+//    - ID lapangan
+//    - Nama lapangan
+//    - Kategori lapangan
+//    - Harga lapangan
+//    - Deskripsi lapangan
+//    - Fasilitas lapangan
+// 2. Cek apakah ada gambar baru yang diupload:
+//    - Jika ada gambar baru, pindahkan gambar ke folder 'uploads/'.
+//    - Jika tidak ada gambar baru, gunakan gambar yang sudah ada dari database.
+// 3. Perbarui data lapangan di tabel 'lapangan' di database berdasarkan ID lapangan yang dipilih.
+// 4. Jika query berhasil dijalankan, tampilkan pesan sukses dan alihkan pengguna ke halaman 'lapangan.php'.
+// 5. Jika terjadi kesalahan dalam query, tampilkan pesan error dan alihkan pengguna ke halaman 'lapangan.php'.
+// 6. Jika request bukan POST, redirect ke halaman 'lapangan.php'.
 include 'koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
