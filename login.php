@@ -1,9 +1,38 @@
 
 <?php
+/*
+Pseudocode:
+
+1. Inisialisasi dan aktivasi error reporting
+    - Aktifkan error reporting untuk membantu debugging.
+
+2. Mulai session pengguna
+    - Mulai session untuk menyimpan data pengguna yang login.
+
+3. Cek apakah pengguna sudah login
+    - Jika session 'username' sudah diset, arahkan pengguna ke halaman beranda.
+
+4. Proses login pengguna
+    - Jika tombol login ditekan, lakukan langkah berikut:
+        a. Ambil nilai username dan password dari form login.
+        b. Amankan input menggunakan mysqli_real_escape_string untuk mencegah SQL injection.
+        c. Query database untuk mencari data pengguna berdasarkan username.
+        d. Jika data ditemukan, verifikasi password menggunakan password_verify.
+            - Jika password cocok, simpan data session dan arahkan pengguna ke halaman yang sesuai berdasarkan role:
+                - Jika role pengguna adalah 'admin', arahkan ke dashboard.
+                - Jika role pengguna adalah selain admin, arahkan ke halaman beranda.
+            - Jika password tidak cocok, tampilkan pesan kesalahan.
+        e. Jika username tidak ditemukan, tampilkan pesan kesalahan.
+
+5. HTML Struktur
+    - Tampilkan halaman login dengan form untuk input username dan password.
+    - Tambahkan fungsionalitas untuk menampilkan/hide password dengan menggunakan JavaScript.
+    - Sediakan link untuk lupa password dan daftar akun baru.
+
+6. Fungsi JavaScript
+    - Implementasikan fungsi toggle untuk menampilkan/hide password ketika tombol eye diklik.
+*/
 include 'koneksi.php';
-// Aktifkan error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 // Sertakan koneksi
 session_start();
